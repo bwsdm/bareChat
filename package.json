@@ -1,0 +1,17 @@
+{
+  "name": "brittlchat",
+  "version": "1.0.0",
+  "description": "chat app for BrittleKnee",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "bwsdm",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^13.2.1"
+  },
+  "dependencies": {
+    "tmi.js": "^1.8.5"
+  }
+}
