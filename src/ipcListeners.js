@@ -1,4 +1,5 @@
-const tmi = require('tmi.js');
+const { ipcMain } = require('electron')
+const tmi = require('tmi.js')
 
 function getMessages() {
 	const client = new tmi.Client({
@@ -25,4 +26,8 @@ function getMessages() {
 	}
 }
 
-//exports = { getMessages };
+
+ipcMain.handle('chat-start', (event, arg) => {
+	getMessages()
+	event.reply('chat-start-reply', 'Started chat stream')
+})
