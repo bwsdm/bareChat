@@ -37,10 +37,10 @@ ipcMain.on('start-chat', (event, arg) => {
 			secure: true
 		},
 		identity: {
-			username: 'alcaeus_',
-			password: 'oauth:4o2d4gjarti4qzcj54iom0h2dmmbnx'
+			username: '',
+			password: ''
 		},
-		channels: [ 'cohhcarnage' ]
+		channels: [ '' ]
 	});
 
 	client.connect().catch(console.error);
