@@ -9,6 +9,13 @@ contextBridge.exposeInMainWorld(
 			if (element) {
 				element.innerText = arg
 			}
+		}),
+		getAuthURL: () => ipcRenderer.send('get-auth-URL'),
+		recAuthURL: (event, url) => ipcRenderer.on('auth-URL-reply', (event, url) => {
+			console.log(url);
+			document.getElementById("loginButton").onclick = function (url) {
+				location.href = url
+			}
 		})
 	}
 )
