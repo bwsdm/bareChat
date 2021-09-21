@@ -1,4 +1,6 @@
-const { contextBridge, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer, shell } = require('electron');
+
+
 
 contextBridge.exposeInMainWorld(
 	'electron',
@@ -12,10 +14,11 @@ contextBridge.exposeInMainWorld(
 		}),
 		getAuthURL: () => ipcRenderer.send('get-auth-URL'),
 		recAuthURL: (event, url) => ipcRenderer.on('auth-URL-reply', (event, url) => {
-			console.log(url);
-			document.getElementById("loginButton").onclick = function (url) {
-				location.href = url
-			}
+			const loginButton = document.getElementById("loginButton")
+			loginButton.addEventListener('click', function(event) {
+				shell.openExternal(url);
+			})
+			
 		})
 	}
 )

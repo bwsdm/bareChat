@@ -1,7 +1,6 @@
-const { app, BrowserWindow, ipcMain, shell } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const tmi = require('tmi.js');
-const https = require('https');
 const querystring = require('querystring');
 
 var output = "";
@@ -21,6 +20,7 @@ function createWindow () {
 
 
 app.whenReady().then(() => {
+	
 	createWindow()
 
 	app.on('activate', function() {
@@ -45,17 +45,7 @@ ipcMain.on('get-auth-URL', (event, arg) => {
 
 	const args = querystring.stringify(params);
 	event.reply('auth-URL-reply', url + args);
-/*
-	https.get((url + args), (res) => {
-		res.on('data', (d) => {
-			output += d;
-		}).on('end', () => {
-			console.log(output.json());			
-		})
-	}).on('error', (e) => {
-		console.error(e);
-	});
-*/		
+	
 })
 
 ipcMain.on('start-chat', (event, arg) => {
