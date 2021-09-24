@@ -1,7 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const tmi = require('tmi.js');
-const querystring = require('querystring');
+const auth = require('./authWindow.js');
+
 
 var output = "";
 
@@ -18,7 +19,7 @@ function createWindow () {
 	win.loadFile('index.html')
 }
 
-
+	
 app.whenReady().then(() => {
 	
 	createWindow()
@@ -34,18 +35,8 @@ app.on('window-all-closed', function () {
 	if (process.platform !== 'darwin') app.quit()
 })
 
-ipcMain.on('get-auth-URL', (event, arg) => {
-	const params = {
-		client_id: 'fqqc53xh0gnvms57x43k07walos930',
-		redirect_uri: 'http://localhost',
-		response_type: 'token',
-		scope: 'chat:read chat:edit'
-	}
-	const url = 'https://id.twitch.tv/oauth2/authorize?'
-
-	const args = querystring.stringify(params);
-	event.reply('auth-URL-reply', url + args);
-	
+ipcMain.on('auth', (event, arg) => {
+	auth.createAuthWindow();	
 })
 
 ipcMain.on('start-chat', (event, arg) => {
